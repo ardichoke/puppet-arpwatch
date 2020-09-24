@@ -7,25 +7,41 @@
   "source": "https://github.com/ardichoke/puppet-arpwatch",
   "project_page": "https://github.com/ardichoke/puppet-arpwatch",
   "issues_url": "https://github.com/ardichoke/puppet-arpwatch/issues",
-  "operatingsystem_support": [
-      {
-          "operatingsystem": "RedHat",
-          "operatingsystemrelease": [
-              "5",
-              "6",
-              "7"
-          ]
-      },
-      {
-          "operatingsystem": "Debian",
-          "operatingsystemrelease": [
-              "7",
-              "8"
-          ]
-      }
-  ],
   "dependencies": [
-      { "name": "puppetlabs/stdlib", "version_requirement": ">=1.0.0 <5.0.0"}
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">=1.0.0 <5.0.0"
+    }
   ],
-  "tags": ["arpwatch","network","monitoring"]
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "7",
+        "8"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 4.10.0 < 7.0.0"
+    }
+  ],
+  "tags": [
+    "arpwatch",
+    "network",
+    "monitoring"
+  ],
+  "pdk-version": "1.18.1",
+  "template-url": "pdk-default#1.18.1",
+  "template-ref": "tags/1.18.1-0-g3d2e75c"
 }
