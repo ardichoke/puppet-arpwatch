@@ -21,22 +21,22 @@
 # @param [String] service_ensure Ensure value, passed to the service resource
 # @param [String] service_name Name of the service to manage
 # @param [String] service_user Defines the user account that arpwatch will run under
-# @param [String] source_email Define the source email address for arpwatch alerts (RedHat only)
+# @param [String] source_email Define the source email address for arpwatch alerts
 #
 class arpwatch (
-  $config_file = $arpwatch::params::config_file,
-  $config_template = $arpwatch::params::config_template,
+  $config_file = '/etc/default/arpwatch',
+  $config_template = 'arpwatch/conf.deb.erb',
   $dest_email = '-',
-  $interface = $arpwatch::params::interface,
-  $opts = $arpwatch::params::opts,
+  $interface = 'eth0',
+  $opts = '-N -p',
   $package_ensure = 'installed',
-  $package_name = $arpwatch::params::package_name,
+  $package_name = 'arpwatch',
   $service_enable = true,
   $service_ensure = 'running',
-  $service_name = $arpwatch::params::service_name,
-  $service_user = $arpwatch::params::service_user,
+  $service_name = 'arpwatch',
+  $service_user = 'arpwatch',
   $source_email = "arpwatch@${::fqdn}",
-  ) inherits arpwatch::params {
+  ) {
     validate_string($dest_email)
     validate_string($package_name)
     validate_string($service_user)
@@ -65,5 +65,7 @@ class arpwatch (
       ensure => $service_ensure,
       enable => $service_enable,
     }
-    Package[$package_name]->File[$config_file]~>Service[$service_name]
+    Package[$package_name]
+    -> File[$config_file]
+    ~> Service[$service_name]
 }
