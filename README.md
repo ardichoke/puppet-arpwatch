@@ -1,6 +1,6 @@
 # arpwatch
 
-#### Table of Contents
+## Table of Contents
 
 1. [Description](#description)
 1. [Setup - The basics of getting started with arpwatch](#setup)
@@ -60,6 +60,7 @@ Specifies the interface to monitor for arp changes. Valid options: string contai
 #### `opts`
 
 Specify additional options to pass to arpwatch at start. Valid options: string of command line options. Default: OS dependant
+
 #### `package_ensure`
 
 Tells Puppet whether the arpwatch package should be installed, and what version. Valid options: 'present', 'latest', or a specific version number. Default value: 'present'
@@ -96,11 +97,3 @@ Pull requests are welcome to add support for other platforms.
 ## Development
 
 Pull requests are welcome. Please make sure to properly document any additions or changes made to the module.
-
-## Release Notes
-
-v0.2.0 - Add support for Debian
-
-v0.1.2 - Add spec tests and dependencies
-
-v0.1.0 - Initial release of arpwatch module
