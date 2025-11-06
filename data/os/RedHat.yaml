@@ -1,4 +1,5 @@
 ---
 arpwatch::config_file: /etc/sysconfig/arpwatch
 arpwatch::config_template: arpwatch/conf.rhel.erb
+arpwath::service_name: arpwatch
 arpwatch::opts: ''

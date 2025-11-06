@@ -24,30 +24,19 @@
 # @param [String] source_email Define the source email address for arpwatch alerts
 #
 class arpwatch (
-  $config_file = '/etc/default/arpwatch',
-  $config_template = 'arpwatch/conf.deb.erb',
-  $dest_email = '-',
-  $interface = 'eth0',
-  $opts = '-N -p',
-  $package_ensure = 'installed',
-  $package_name = 'arpwatch',
-  $service_enable = true,
-  $service_ensure = 'running',
-  $service_name = 'arpwatch',
-  $service_user = 'arpwatch',
-  $source_email = "arpwatch@${::fqdn}",
+  Stdlib::Unixpath        $config_file = '/etc/default/arpwatch',
+  String[1]               $config_template = 'arpwatch/conf.deb.erb',
+  String[1]               $dest_email = '-',
+  String[1]               $interface = 'eth0',
+  String[1]               $opts = '-N -p',
+  Stdlib::Ensure::Package $package_ensure = 'installed',
+  String[1]               $package_name = 'arpwatch',
+  Boolean                 $service_enable = true,
+  Stdlib::Ensure::Service $service_ensure = 'running',
+  String[1]               $service_name = 'arpwatch@eth0',
+  String[1]               $service_user = 'arpwatch',
+  Stdlib::Email           $source_email = "arpwatch@${fact('networking.fqdn')}",
   ) {
-    validate_string($dest_email)
-    validate_string($package_name)
-    validate_string($service_user)
-    validate_string($service_name)
-    validate_string($interface)
-    validate_absolute_path($config_file)
-    validate_string($package_ensure)
-    validate_string($source_email)
-    validate_bool($service_enable)
-    validate_string($service_ensure)
-
     package {
       $package_name:
       ensure => $package_ensure,
