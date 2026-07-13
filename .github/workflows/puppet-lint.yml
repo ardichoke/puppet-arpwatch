@@ -17,32 +17,13 @@ permissions:
 
 jobs:
   puppet-lint:
-    name: Run puppet-lint scanning
     runs-on: ubuntu-latest
-    permissions:
-      contents: read # for checkout to fetch code
-      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
-      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status 
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Setup Ruby, JRuby and TruffleRuby
-        uses: ruby/setup-ruby@v1.120.0
+      - name: puppet-lint
+        uses: scottbrenner/puppet-lint-action@v1.0.9
         with:
-          ruby-version: 2.7
-          bundler-cache: true
-
-      - name: Install puppet-lint
-        run: gem install puppet-lint
-
-      - name: Run puppet-lint
-        run: puppet-lint **/*.pp --sarif > puppet-lint-results.sarif
-        continue-on-error: true
-
-      - name: Upload analysis results to GitHub
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: puppet-lint-results.sarif
-          wait-for-processing: true
+          args: ./
